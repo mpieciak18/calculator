@@ -46,6 +46,11 @@ body {
     font-family: 'Digital-7, regular';
     text-align: right;
     padding: 5px;
+    pointer-events: none;
+}
+#numbers > a {
+    text-decoration: none;
+    color: inherit;
 }
 .button-row {
     display: flex;
