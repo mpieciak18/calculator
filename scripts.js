@@ -23,10 +23,25 @@ let untouchColor = function(event) {
         hoveredButton.style.backgroundColor = 'rgb(255, 255, 255)';
     };
 };
+let screenDisplay = document.getElementById('numbers');
+let enterNumber = function(event) {
+    let newDisplay;
+    if (screenDisplay.innerHTML == '0') {
+        newDisplay = event.target.innerHTML;
+    } else if (screenDisplay.innerHTML.length < 9) {
+        newDisplay = screenDisplay.innerHTML + event.target.innerHTML;
+    } else {
+        newDisplay = screenDisplay.innerHTML.slice(1,9) + event.target.innerHTML;
+    }
+    screenDisplay.innerHTML = newDisplay;
+};
 for (i = 0; i < buttons.length; i++) {
     console.log(buttons[i]);
     buttons[i].addEventListener('touchstart', touchColor);
     buttons[i].addEventListener('touchend', untouchColor);
+    if (Number(buttons[i].id) >= 0 && Number(buttons[i].id) <= 9) {
+        buttons[i].addEventListener('click', enterNumber);
+    };
 };
 let add = function(x,y) {
     return (x + y)

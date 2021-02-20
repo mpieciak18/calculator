@@ -44,6 +44,7 @@ body {
 #numbers {
     font-size: 61px;
     font-family: 'Digital-7, regular';
+    color: rgb(30, 30, 30);
     text-align: right;
     padding: 5px;
     pointer-events: none;
