@@ -28,20 +28,34 @@ let enterNumber = function(event) {
     let newDisplay;
     if (screenDisplay.innerHTML == '0') {
         newDisplay = event.target.innerHTML;
-    } else if (screenDisplay.innerHTML.length < 9) {
+    } else if (screenDisplay.innerHTML.indexOf('.') == -1 && screenDisplay.innerHTML.length < 9) {
+        newDisplay = screenDisplay.innerHTML + event.target.innerHTML;
+    } else if (screenDisplay.innerHTML.indexOf('.') != -1 && screenDisplay.innerHTML.length < 10) {
         newDisplay = screenDisplay.innerHTML + event.target.innerHTML;
     } else {
-        newDisplay = screenDisplay.innerHTML.slice(1,9) + event.target.innerHTML;
+        newDisplay = screenDisplay.innerHTML;
     }
     screenDisplay.innerHTML = newDisplay;
 };
+let enterDecimal = function(event) {
+    let newDisplay;
+    if (screenDisplay.innerHTML.indexOf('.') == -1 && screenDisplay.innerHTML.length < 9) {
+        newDisplay = screenDisplay.innerHTML + '.';
+    } else {
+        newDisplay = screenDisplay.innerHTML;
+    };
+    screenDisplay.innerHTML = newDisplay;
+}
 for (i = 0; i < buttons.length; i++) {
     console.log(buttons[i]);
     buttons[i].addEventListener('touchstart', touchColor);
     buttons[i].addEventListener('touchend', untouchColor);
     if (Number(buttons[i].id) >= 0 && Number(buttons[i].id) <= 9) {
         buttons[i].addEventListener('click', enterNumber);
-    };
+    } else if (buttons[i].id == 'decimal') {
+        console.log(buttons[i].id);
+        buttons[i].addEventListener('click', enterDecimal);
+    }
 };
 let add = function(x,y) {
     return (x + y)
