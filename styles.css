@@ -4,6 +4,13 @@ body {
     flex-direction: column;
     align-items: center;
     height: 97.25vh;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome, Edge, Opera and Firefox */
 }
 #calculator {
     display: flex;
@@ -35,44 +42,45 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(255, 255, 255);
 }
-.button:hover {
-    background-color: rgb(223, 223, 223);
-}
-.button:active {
-    background-color: rgb(201, 201, 201);
-}
 #plus, #minus, #multiply, #divide, #equals, #decimal {
     font-size: xx-large;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background-color: rgb(223, 223, 223);
+  }
+   .button:active {
+    background-color: rgb(201, 201, 201);
+  }
+  #ac:hover {
+    background-color:rgb(231, 178, 178);
+  }
+   #ac:active {
+    background-color:rgb(206, 164, 164);
+  }
+  #c:hover {
+    background-color: rgb(231, 206, 179);
+  }
+   #c:active {
+    background-color: rgb(206, 183, 159);
+  }
+  #equals:hover {
+    background-color: rgb(179, 231, 179);
+  }
+   #equals:active {
+    background-color: rgb(160, 207, 160);
+  }
 }
 #ac {
     background-color:rgb(255, 200, 200);
 }
-#ac:hover {
-    background-color:rgb(231, 178, 178);
-}
-#ac:active {
-    background-color:rgb(206, 164, 164);
-}
 #c {
     background-color: rgb(255, 228, 200);
-}
-#c:hover {
-    background-color: rgb(231, 206, 179);
-}
-#c:active {
-    background-color: rgb(206, 183, 159);
 }
 #equals {
     width: 133.5px;
     background-color: rgba(200, 255, 200);
-}
-#equals:hover {
-    width: 133.5px;
-    background-color: rgb(179, 231, 179);
-}
-#equals:active {
-    width: 133.5px;
-    background-color: rgb(160, 207, 160);
 }
 #calculator, #screen, .button {
     border-width: 2px;
