@@ -1,4 +1,159 @@
-let buttons = document.getElementsByClassName('button');
+let calc = {
+    //
+    // Basic attributes
+    expression: [],
+    currentNum: '',
+    resetDisplayOnNextInput: false,
+    resetExpressionOnNextInput: false,
+    //
+    // HTML elements
+    display: document.getElementById('numbers'),
+    buttons: document.getElementsByClassName('button'),
+    //
+    // Input & operation methods
+    enterNum: function(event) {
+        if (calc.resetExpressionOnNextInput == true) {
+            calc.expression = [];
+        }
+        if (calc.resetDisplayOnNextInput == true) {
+            calc.display.innerHTML = '0';
+            calc.resetDisplayOnNextInput = false;
+        };
+        let newDisplay;
+        if (calc.display.innerHTML == '0') {
+            newDisplay = event.target.innerHTML;
+        } else if (calc.display.innerHTML.indexOf('.') == -1 && calc.display.innerHTML.length < 9
+            || calc.display.innerHTML.indexOf('.') != -1 && calc.display.innerHTML.length < 10) {
+            newDisplay = calc.display.innerHTML + event.target.innerHTML;
+        } else {
+            newDisplay = calc.display.innerHTML;
+        };
+        calc.currentNum = newDisplay;
+        calc.display.innerHTML = newDisplay;
+    },
+    enterDec: function(event) {
+        let newDisplay;
+        if (calc.resetDisplayOnNextInput == true) {
+            calc.display.innerHTML = '0.';
+            calc.resetDisplayOnNextInput = false;
+        } else if (calc.display.innerHTML.indexOf('.') == -1 && calc.display.innerHTML.length < 9) {
+            newDisplay = calc.display.innerHTML + '.';
+        } else {
+            newDisplay = calc.display.innerHTML;
+        };
+        calc.display.innerHTML = newDisplay;
+    },
+    enterOperator: function(event) {
+        let currentNum = Number(calc.currentNum);
+        let operator = event.target;
+        if (operator.id == 'multiply') {
+            calc.expression.push(currentNum);
+            calc.expression.push('*');
+        } else if (operator.id == 'minus') {
+            calc.expression.push(currentNum);
+            calc.expression.push('-');
+        } else if (operator.id == 'plus') {
+            calc.expression.push(currentNum);
+            calc.expression.push('+');
+        } else if (operator.id == 'divide') {
+            calc.expression.push(currentNum);
+            calc.expression.push('/');
+        } else if (operator.id == 'percent') {
+            calc.display.innerHTML = (currentNum / 100);
+            calc.currentNum = (currentNum / 100).toString();
+        };
+        calc.resetDisplayOnNextInput = true;
+    },
+    multiply: function(expression) {
+        let newExpression;
+        for (i = 0; i < expression.length; i++) {
+            if (expression[i] == '*') {
+                expression[i-1] = expression[i-1] * expression[i+1];
+                newExpression = (expression.slice(0, i)).concat(expression.slice(i+2));
+                return calc.multiply(newExpression);
+            } else {
+                continue;
+            };
+        };
+        return expression;
+    },
+    divide: function(expression) {
+        let newExpression;
+        for (i = 0; i < expression.length; i++) {
+            if (expression[i] == '/') {
+                expression[i-1] = expression[i-1] / expression[i+1];
+                newExpression = (expression.slice(0, i)).concat(expression.slice(i+2));
+                return calc.divide(newExpression);
+            } else {
+                continue;
+            };
+        };
+        return expression;
+    },
+    percent: function(expression) {
+        let newExpression;
+        for (i = 0; i < expression.length; i++) {
+            if (expression[i] == '%') {
+                expression[i-1] = expression[i-1] / expression[i+1];
+                newExpression = (expression.slice(0, i)).concat(expression.slice(i+2));
+                return calc.percent(newExpression);
+            } else {
+                continue;
+            };
+        };
+        return expression;
+    },
+    add: function(expression) {
+        let newExpression;
+        for (i = 0; i < expression.length; i++) {
+            if (expression[i] == '+') {
+                expression[i-1] = expression[i-1] + expression[i+1];
+                newExpression = (expression.slice(0, i)).concat(expression.slice(i+2));
+                return calc.add(newExpression);
+            } else {
+                continue;
+            };
+        };
+        return expression;
+    },
+    subtract: function(expression) {
+        let newExpression;
+        for (i = 0; i < expression.length; i++) {
+            if (expression[i] == '-') {
+                expression[i-1] = expression[i-1] - expression[i+1];
+                newExpression = (expression.slice(0, i)).concat(expression.slice(i+2));
+                return calc.subtract(newExpression);
+            } else {
+                continue;
+            };
+        };
+        return expression;
+    },
+    equals: function() {
+        calc.expression.push(Number(calc.currentNum));
+        let answer = calc.multiply(calc.expression);
+        answer = calc.divide(answer);
+        answer = calc.percent(answer);
+        answer = calc.add(answer);
+        answer = calc.subtract(answer);
+        answer = answer[0];
+        calc.display.innerHTML = answer.toString();
+        calc.currentNum = answer;
+        calc.resetDisplayOnNextInput = true;
+    },
+    clear: function() {
+        calc.currentNum = '';
+        calc.display.innerHTML = '0';
+    },
+    allClear: function() {
+        calc.expression = [];
+        calc.currentNum = '';
+        calc.resetDisplayOnNextInput = false;
+        calc.display.innerHTML = '0';
+    }
+};
+//
+// Add color-change functions to each button
 let touchColor = function(event) {
     let clickedButton = event.target;
     if (clickedButton.id == 'ac') {
@@ -23,91 +178,24 @@ let untouchColor = function(event) {
         hoveredButton.style.backgroundColor = 'rgb(255, 255, 255)';
     };
 };
-let screenDisplay = document.getElementById('numbers');
-let firstNumber = '';
-let secondNumber = '';
-let enteringFirstNumber = true;
-let enterNumber = function(event) {
-    let newDisplay;
-    if (screenDisplay.innerHTML == '0') {
-        newDisplay = event.target.innerHTML;
-    } else if (screenDisplay.innerHTML.indexOf('.') == -1 && screenDisplay.innerHTML.length < 9
-        || screenDisplay.innerHTML.indexOf('.') != -1 && screenDisplay.innerHTML.length < 10) {
-        newDisplay = screenDisplay.innerHTML + event.target.innerHTML;
-    } else {
-        newDisplay = screenDisplay.innerHTML;
-    };
-    updateInputs(newDisplay);
-    screenDisplay.innerHTML = newDisplay;
-};
-let enterDecimal = function(event) {
-    let newDisplay;
-    if (screenDisplay.innerHTML.indexOf('.') == -1 && screenDisplay.innerHTML.length < 9) {
-        newDisplay = screenDisplay.innerHTML + '.';
-    } else {
-        newDisplay = screenDisplay.innerHTML;
-    };
-    screenDisplay.innerHTML = newDisplay;
-};
-let updateInputs = function(newDisplay) {
-    if (enteringFirstNumber == true) {
-        firstNumber = newDisplay;
-    } else {
-        secondNumber = newDisplay;
-    };
-};
-// Placeholder operator functions
-let add = function(x,y) {
-    return (x + y)
-};
-let subtract = function(x,y) {
-    return (x - y)
-};
-let multiply = function(x,y) {
-    return (x * y)
-};
-let divide = function(x,y) {
-    return (x / y)
-};
-let percent = function(x,y) {
-    return (x / y)
-};
-let clear = function(x,y) {
-    x = '';
-    y = '';
-};
-let allClear = function(x,y) {
-    x = '';
-    y = '';
-};
-let operator = function() {
-    return;
-};
-
-// Add eventListener + functions to each button
-for (i = 0; i < buttons.length; i++) {
-    let button = buttons[i];
+//
+// Add calculator functions to each button
+for (i = 0; i < calc.buttons.length; i++) {
+    let button = calc.buttons[i];
     button.addEventListener('touchstart', touchColor);
     button.addEventListener('touchend', untouchColor);
     if (Number(button.id) >= 0 && Number(button.id) <= 9) {
-        button.addEventListener('click', enterNumber);
+        button.addEventListener('click', calc.enterNum);
     } else if (button.id == 'decimal') {
-        button.addEventListener('click', enterDecimal);
+        button.addEventListener('click', calc.enterDec);
     } else if (button.id == 'equals') {
-        button.addEventListener('click', operator);
-    } else if (button.id == 'multiply') {
-        button.addEventListener('click', multiply);
-    } else if (button.id == 'minus') {
-        button.addEventListener('click', subtract);
-    } else if (button.id == 'plus') {
-        button.addEventListener('click', add);
-    } else if (button.id == 'divide') {
-        button.addEventListener('click', divide);
-    } else if (button.id == 'percent') {
-        button.addEventListener('click', percent);
+        button.addEventListener('click', calc.equals);
+    } else if (button.id == 'multiply' || button.id == 'minus' 
+            || button.id == 'plus' || button.id == 'divide' || button.id == 'percent') {
+        button.addEventListener('click', calc.enterOperator);
     } else if (button.id == 'c') {
-        button.addEventListener('click', clear);
+        button.addEventListener('click', calc.clear);
     } else if (button.id == 'ac') {
-        button.addEventListener('click', allClear);
+        button.addEventListener('click', calc.allClear);
     };
 };
