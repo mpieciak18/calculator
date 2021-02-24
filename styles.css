@@ -15,7 +15,7 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 97.25vh;
+    height: 97vh;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -28,19 +28,26 @@ body {
     font-family: 'Bulletto Killa, regular';
     font-size: large;
     color: rgb(65, 65, 65);
-    padding: 20px;
-    padding-bottom: 0px;
-    margin: 0px;
+    padding-top: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: -80px;
 }
 #calculator {
     background-color: rgb(236, 236, 236);
+    height: 500px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 #inner-calculator {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 500px;
-    width: 325px;
+    height: 480px;
+    width: 300px;
     padding-top: 0px;
     padding-bottom: 10px;
     padding-left: 20px;
@@ -48,14 +55,15 @@ body {
 }
 #screen {
     height: 45px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     background-color: rgb(201, 201, 201);
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 #numbers {
-    font-size: 39px;
+    font-size: 36px;
     font-family: 'FixSysCTT';
     color: rgb(50, 50, 50);
     text-align: right;
@@ -121,7 +129,7 @@ body {
     background-color: rgb(255, 228, 200);
 }
 #equals {
-    width: 150.5px;
+    width: 142px;
     background-color: rgba(200, 255, 200);
 }
 #calculator, #screen, .button {
