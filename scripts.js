@@ -19,8 +19,7 @@ let calc = {
         let newDisplay;
         if (calc.display.innerHTML == '0') {
             newDisplay = event.target.innerHTML;
-        } else if (calc.display.innerHTML.indexOf('.') == -1 && calc.display.innerHTML.length < 9
-            || calc.display.innerHTML.indexOf('.') != -1 && calc.display.innerHTML.length < 10) {
+        } else if (calc.display.innerHTML.length < 14) {
             newDisplay = calc.display.innerHTML + event.target.innerHTML;
         } else {
             newDisplay = calc.display.innerHTML;
@@ -33,7 +32,7 @@ let calc = {
         if (calc.resetDisplayOnNextInput == true) {
             calc.display.innerHTML = '0.';
             calc.resetDisplayOnNextInput = false;
-        } else if (calc.display.innerHTML.indexOf('.') == -1 && calc.display.innerHTML.length < 9) {
+        } else if (calc.display.innerHTML.indexOf('.') == -1 && calc.display.innerHTML.length < 14) {
             newDisplay = calc.display.innerHTML + '.';
         } else {
             newDisplay = calc.display.innerHTML;
@@ -133,8 +132,20 @@ let calc = {
         answer = calc.percent(answer);
         answer = calc.add(answer);
         answer = calc.subtract(answer);
-        answer = answer[0];
-        calc.display.innerHTML = answer.toString();
+        answer = answer[0].toString();
+        if (answer.length <= 14) {
+            calc.display.innerHTML = answer;
+        } else if (answer.indexOf('.') != -1 && answer.indexOf('.') < 13) {
+            let decimalPlace = answer.indexOf('.');
+            let decimalLength = answer.slice(decimalPlace, 13).length;
+            answer = Number(answer).toFixed(decimalLength);
+            answer = answer.toString();
+            calc.display.innerHTML = answer;
+        // } else if (answer.indexOf('.') != -1 && answer.indexOf('.') > 13 && answer.length > 14) {
+        //     let answer = Number(answer).toFixed(1);
+        //     answer = answer.toString();
+        //     calc.display.innerHTML = answer;
+        // }
         calc.currentNum = answer;
         calc.resetDisplayOnNextInput = true;
         calc.expression = [];
