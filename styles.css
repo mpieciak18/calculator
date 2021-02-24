@@ -28,19 +28,26 @@ body {
     font-family: 'Bulletto Killa, regular';
     font-size: large;
     color: rgb(65, 65, 65);
-    margin-top: -10px;
+    padding: 20px;
+    padding-bottom: 0px;
+    margin: 0px;
 }
 #calculator {
+    background-color: rgb(236, 236, 236);
+}
+#inner-calculator {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 600px;
-    width: 375px;
-    padding: 20px;
-    background-color: rgb(236, 236, 236);
+    height: 500px;
+    width: 325px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 #screen {
-    height: 60px;
+    height: 45px;
     margin-bottom: 15px;
     background-color: rgb(201, 201, 201);
     display: flex;
@@ -48,7 +55,7 @@ body {
     justify-content: center;
 }
 #numbers {
-    font-size: 45px;
+    font-size: 39px;
     font-family: 'FixSysCTT';
     color: rgb(50, 50, 50);
     text-align: right;
@@ -67,8 +74,8 @@ body {
     justify-content: space-between;
 }
 .button {
-    height: 75px;
-    width: 82px;
+    height: 60px;
+    width: 65px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -114,7 +121,7 @@ body {
     background-color: rgb(255, 228, 200);
 }
 #equals {
-    width: 178.5px;
+    width: 150.5px;
     background-color: rgba(200, 255, 200);
 }
 #calculator, #screen, .button {
