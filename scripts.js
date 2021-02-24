@@ -12,9 +12,6 @@ let calc = {
     //
     // Input & operation methods
     enterNum: function(event) {
-        // if (calc.resetExpressionOnNextInput == true) {
-        //     calc.expression = [];
-        // };
         if (calc.resetDisplayOnNextInput == true) {
             calc.display.innerHTML = '0';
             calc.resetDisplayOnNextInput = false;
@@ -33,9 +30,6 @@ let calc = {
     },
     enterDec: function(event) {
         let newDisplay;
-        // if (calc.resetExpressionOnNextInput == true) {
-        //     calc.expression = [];
-        // };
         if (calc.resetDisplayOnNextInput == true) {
             calc.display.innerHTML = '0.';
             calc.resetDisplayOnNextInput = false;
@@ -144,7 +138,6 @@ let calc = {
         calc.currentNum = answer;
         calc.resetDisplayOnNextInput = true;
         calc.expression = [];
-        // calc.resetExpressionOnNextInput = true;
     },
     clear: function() {
         calc.currentNum = '';
