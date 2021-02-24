@@ -26,17 +26,16 @@ body {
 }
 #title {
     font-family: 'Bulletto Killa, regular';
-    font-size: medium;
+    font-size: large;
     color: rgb(65, 65, 65);
-    margin-top: 0;
-    margin-bottom: 15px;
+    margin-top: -10px;
 }
 #calculator {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 500px;
-    width: 285px;
+    justify-content: space-evenly;
+    height: 600px;
+    width: 375px;
     padding: 20px;
     background-color: rgb(236, 236, 236);
 }
@@ -49,7 +48,7 @@ body {
     justify-content: center;
 }
 #numbers {
-    font-size: 54px;
+    font-size: 45px;
     font-family: 'FixSysCTT';
     color: rgb(50, 50, 50);
     text-align: right;
@@ -68,8 +67,8 @@ body {
     justify-content: space-between;
 }
 .button {
-    height: 60px;
-    width: 60px;
+    height: 75px;
+    width: 82px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -115,7 +114,7 @@ body {
     background-color: rgb(255, 228, 200);
 }
 #equals {
-    width: 133.5px;
+    width: 178.5px;
     background-color: rgba(200, 255, 200);
 }
 #calculator, #screen, .button {
