@@ -10,7 +10,7 @@ let calc = {
     display: document.getElementById('numbers'),
     buttons: document.getElementsByClassName('button'),
     //
-    // Input & operation methods
+    // Input methods
     enterNum: function(event) {
         if (calc.resetDisplayOnNextInput == true) {
             calc.display.innerHTML = '0';
@@ -39,9 +39,12 @@ let calc = {
         };
         calc.display.innerHTML = newDisplay;
     },
+    //
+    // Operation methods
     enterOperator: function(event) {
         let currentNum = Number(calc.currentNum);
         let operator = event.target;
+        calc.currentNum = '';
         if (operator.id == 'multiply') {
             calc.expression.push(currentNum);
             calc.expression.push('*');
@@ -126,18 +129,24 @@ let calc = {
         return expression;
     },
     equals: function() {
-        calc.expression.push(Number(calc.currentNum));
-        let answer = calc.multiply(calc.expression);
-        answer = calc.divide(answer);
-        answer = calc.percent(answer);
-        answer = calc.add(answer);
-        answer = calc.subtract(answer);
-        answer = answer[0].toString();
-        calc.display.innerHTML = answer;
-        calc.currentNum = answer;
+        if (calc.currentNum == '') {
+            calc.display.innerHTML = 'ERROR';
+        } else {
+            calc.expression.push(Number(calc.currentNum));
+            let answer = calc.multiply(calc.expression);
+            answer = calc.divide(answer);
+            answer = calc.percent(answer);
+            answer = calc.add(answer);
+            answer = calc.subtract(answer);
+            answer = answer[0].toString();
+            calc.display.innerHTML = answer;
+            calc.currentNum = answer;
+        };
         calc.resetDisplayOnNextInput = true;
         calc.expression = [];
     },
+    //
+    // Clearing methods
     clear: function() {
         calc.currentNum = '';
         calc.display.innerHTML = '0';
