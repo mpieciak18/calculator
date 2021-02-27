@@ -139,8 +139,13 @@ let calc = {
             answer = calc.add(answer);
             answer = calc.subtract(answer);
             answer = answer[0].toString();
-            calc.display.innerHTML = answer;
-            calc.currentNum = answer;
+            if (answer == 'Infinity' || answer == 'NaN') {
+                calc.display.innerHTML = 'ERROR';
+                calc.currentNum = '';               
+            } else {
+                calc.display.innerHTML = answer;
+                calc.currentNum = answer;
+            }
         };
         calc.resetDisplayOnNextInput = true;
         calc.expression = [];
