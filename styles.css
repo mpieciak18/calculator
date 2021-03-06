@@ -91,6 +91,7 @@ body {
     font-size: x-large;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 #plus, #minus, #multiply, #divide, #equals, #decimal {
     font-size: xx-large;
